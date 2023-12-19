@@ -99,6 +99,62 @@ Each folder in this directory is named in the following format: `{Secondary dire
 
 There are usually two `.pth` models in each folder (`max_AUC_{Model Name}_{epoch}_{AUC}.pth` and `minloss_AUC_{Model Name}_{epoch}_{AUC}.pth`), and sometimes minloss is max, so there is only one model.
 
+## Example usages
+
+### Training and Validation: IEDB with 5-fold cross-validation & Testing: VDJdb
+
+Data from the specified `../data/{sd}/{td}/` reads `train.tsv` and `test.tsv` (`test.tsv` is the validation set here).
+
+If there is no `CNN_feature_cdr3/peptide_train/test.pickle` file in the `../data/{sd}/{td}/` path or no specified models in the `../model/{sd}_{td}_CNN/` path, perform the following operations (pre-trained CNN module):
+
+```console
+conda activate NetTCR2
+python run_CNN.py -sd iedb_5folds -td fold{num}
+```
+where the `{num}` is 0~4 of 5 folds.
+
+Then, start training:
+
+```console
+conda activate HeteroTCR
+python run_Hetero.py -sd iedb_5folds -td fold{num} -cu 0
+```
+
+Select the epoch with the lowest loss in the validation set to save the model to `../model/{sd}_{td}_Hetero/` folder. 
+
+The minloss model (`minloss_AUC_{Model Name}_{epoch}_{AUC}.pth`) is the optimal model obtained by the training of HeteroTCR, and this model can be used to predict on test set.
+
+Next, the optimal model is tested on the independent testing set. 
+
+the pre-trained CNN module is used to extract features from the test set:
+
+```console
+conda activate NetTCR2
+python extra_test_feature.py -sd exp_datasets -td iedb_vdj{score} -tmd iedb_5folds_fold{num}_CNN
+```
+where `{score}` is confidence scores of VDJdb ranging from 0 to 3.
+
+Finally, the optimal model is used to predict the testing set:
+
+```console
+conda activate HeteroTCR
+python test_Hetero.py -sd exp_datasets -td iedb_vdj{score} -tmd iedb_5folds_fold{num}_Hetero
+```
+where `-tmd` is the model path we use.
+
+In summary, the full code is as follows:
+
+```console
+conda activate NetTCR2
+python run_CNN.py -sd iedb_5folds -td fold{num}
+conda activate HeteroTCR
+python run_Hetero.py -sd iedb_5folds -td fold{num} -cu 0
+conda activate NetTCR2
+python extra_test_feature.py -sd exp_datasets -td iedb_vdj{score} -tmd iedb_5folds_fold{num}_CNN
+conda activate HeteroTCR
+python test_Hetero.py -sd exp_datasets -td iedb_vdj{score} -tmd iedb_5folds_fold{num}_Hetero
+```
+
 ## Citation
 
 If you use this code for you research, please cite our paper.
