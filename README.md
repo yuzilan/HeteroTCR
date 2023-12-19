@@ -126,6 +126,8 @@ The minloss model (`minloss_AUC_{Model Name}_{epoch}_{AUC}.pth`) is the optimal 
 
 Next, the optimal model is tested on the independent testing set. 
 
+Data from the specified `../data/{sd}/{td}/` reads `test.tsv` (`test.tsv` is the independent testing set here).
+
 the pre-trained CNN module is used to extract features from the test set:
 
 ```console
