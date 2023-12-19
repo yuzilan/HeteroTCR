@@ -26,6 +26,35 @@ Do the same to install the environment of pre-trained CNN module:
 conda env create -f NetTCR2.yml
 ```
 
+## Contents
+
+### code
+
+The source code of feature extraction, model construction and training, and prediction are deposited in the folder 'code'.
+
+* `config.py`:
+* `data_process.py`:
+* `extra_test_feature.py`:
+* `HeteroModel.py`:
+* `run_CNN.py`:
+* `run_Hetero.py`:
+* `test_Hetero.py`:
+* `tsne_Hetero.py`:
+
+### data
+
+
+
+### History
+
+
+
+
+### model
+
+
+
+
 ## Citation
 
 If you use this code for you research, please cite our paper.
