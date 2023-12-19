@@ -12,13 +12,19 @@ Identifying interactions between T-cell receptors (TCRs) and immunogenic peptide
 
 The pre-trained CNN module was implemented with Keras 2.6.0 (https://keras.io) using the Tensorflow backend and Python 3.7.0. The other described architectures, namely the Heterogeneous GNN module and the MLP classifier, were implemented with PyTorch 1.9.1 (https://pytorch.org) using Python 3.7.11. Specially, PyG (PyTorch Geometric), a library built upon PyTorch to easily write and train GNNs, was employed for modeling and processing graph-structured data. Metric evaluation was implemented with TorchMetrics package.
 
-Running the following command in the base environment will directly create a new environment and install the dependencies in the environment:
+Running the following command in the base environment will directly create a new environment (HeteroTCR) and install the dependencies in the environment:
 
 ```console
 conda env create -f HeteroTCR.yml
 ```
 
 We recommend that you follow the instructions at [https://github.com/rusty1s/pytorch_geometric](https://github.com/rusty1s/pytorch_geometric) to install pytorch_geometric package, especially additional libraries, such as torch-scatter, torch-sparse, etc.
+
+Do the same to install the environment of pre-trained CNN module:
+
+```console
+conda env create -f NetTCR2.yml
+```
 
 ## Citation
 
