@@ -73,7 +73,11 @@ The source code of feature extraction, model construction and training, and pred
     + `test.tsv`
   - `ab_tb.py`: Generating "Antigen-based data sets / unseen epitopes" and "TCR-based data sets / unseen TCRs".
   - `A_B_strict_new`: `A_B_strict` does not guarantee complete strictness of the data, while `A_B_strict_new` processes "Strict-based data sets" as described in the paper.
-
+* `iedb_5folds`
+  - `iedb.tsv`: Results of `construct_exp_datasets.py`.
+  - `5folds.py`: Data processing for 5-fold cross-validation of `iedb.tsv`.
+  - `fold0~4`
+  - `df0~4.tsv`: Intermediate results of `5folds.py`.
 
 ### History
 
