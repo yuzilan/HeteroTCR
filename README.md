@@ -250,10 +250,39 @@ Finally, prepare the dataset we want to predict into a `.tsv` file according to 
 ```commandline
 conda activate NetTCR2
 python extra_test_feature.py -sd my_datasets -td try -tmd exp_datasets_iedb_McPAS_CNN
+conda activate HeteroTCR
 python predict.py -sd my_datasets -td try -tmd exp_datasets_iedb_McPAS_Hetero
 ```
 
 After running the above code, the `try` folder will generate 3 pickle files and a `pred.tsv` file. The probabilities in the pred.tsv file are what we need.
+
+## How to use our own dataset to train HeteroTCR
+
+First, create a `my_datasets` folder under the `data` folder to store the various datasets we want to train and validate. 
+
+Then, for each dataset to be trained or be validated, we create a folder for it (call it `dataset_name`) and put it in the `my_datasets` directory. 
+
+```
++ data
+  |- my_datasets
+    |- dataset_name
+      |- train.tsv
+      |- test.tsv
+    |- XXX
+    |- ...
+
+```
+
+Finally, prepare the training and validation dataset into `.tsv` files according to the specified format (three columns: TCR CDR3β chain amino acid sequence, peptide amino acid sequence, and Binding), and name them `train.tsv` and `test.tsv`.
+
+```commandline
+conda activate NetTCR2
+python run_CNN.py -sd my_datasets -td dataset_name
+conda activate HeteroTCR
+python run_Hetero.py -sd my_datasets -td dataset_name -cu 0
+```
+
+After running the above code, you can find the optimal trained `.pth` models in `../model/my_datasets_dataset_name_CNN` and `../model/my_datasets_dataset_name_Hetero` paths.
 
 ## Citation
 
