@@ -226,6 +226,35 @@ conda activate HeteroTCR
 python test_Hetero.py -sd exp_datasets -td iedb_vdj{score} -tmd iedb_5folds_fold{num}_Hetero
 ```
 
+## How to use trained models to predict the binding probability of peptide-TCR in the dataset we provide ourselves
+
+First, create a `my_datasets` folder under the `data` folder to store the various datasets we want to predict. 
+
+Then, for each dataset to be predicted, we create a folder for it (call it `try`) and put it in the `my_datasets` directory. 
+
+```
++ data
+  |- my_datasets
+    |- try
+      |- test.tsv
+    |- XXX
+    |- ...
+
+```
+
+Finally, prepare the dataset we want to predict into a `.tsv` file according to the specified format (two columns: TCR CDR3β chain amino acid sequence and peptide amino acid sequence), and name it `test.tsv`.
+
+* Optimal trained models: exp_datasets_iedb_McPAS_CNN and exp_datasets_iedb_McPAS_Hetero (Training: IEDB & Validation: McPAS )
+* Predicting on `try`
+
+```commandline
+conda activate NetTCR2
+python extra_test_feature.py -sd my_datasets -td try -tmd exp_datasets_iedb_McPAS_CNN
+python predict.py -sd my_datasets -td try -tmd exp_datasets_iedb_McPAS_Hetero
+```
+
+After running the above code, the `try` folder will generate 3 pickle files and a `pred.tsv` file. The probabilities in the pred.tsv file are what we need.
+
 ## Citation
 
 If you use this code for you research, please cite our paper.
