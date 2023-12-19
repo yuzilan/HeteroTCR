@@ -176,7 +176,7 @@ Data from the specified `../data/{sd}/{td}/` reads `train.tsv` and `test.tsv` (`
 
 If there is no `CNN_feature_cdr3/peptide_train/test.pickle` file in the `../data/{sd}/{td}/` path or no specified models in the `../model/{sd}_{td}_CNN/` path, perform the following operations (pre-trained CNN module):
 
-```console
+```commandline
 conda activate NetTCR2
 python run_CNN.py -sd iedb_5folds -td fold{num}
 ```
@@ -184,7 +184,7 @@ where the `{num}` is 0~4 of 5 folds.
 
 Then, start training:
 
-```console
+```commandline
 conda activate HeteroTCR
 python run_Hetero.py -sd iedb_5folds -td fold{num} -cu 0
 ```
@@ -199,7 +199,7 @@ Data from the specified `../data/{sd}/{td}/` reads `test.tsv` (`test.tsv` is the
 
 The pre-trained CNN module is used to extract features from the test set:
 
-```console
+```commandline
 conda activate NetTCR2
 python extra_test_feature.py -sd exp_datasets -td iedb_vdj{score} -tmd iedb_5folds_fold{num}_CNN
 ```
@@ -207,7 +207,7 @@ where `{score}` is confidence scores of VDJdb ranging from 0 to 3.
 
 Finally, the optimal model is used to predict the testing set:
 
-```console
+```commandline
 conda activate HeteroTCR
 python test_Hetero.py -sd exp_datasets -td iedb_vdj{score} -tmd iedb_5folds_fold{num}_Hetero
 ```
@@ -215,7 +215,7 @@ where `-tmd` is the model path we use.
 
 In summary, the full code is as follows:
 
-```console
+```commandline
 conda activate NetTCR2
 python run_CNN.py -sd iedb_5folds -td fold{num}
 conda activate HeteroTCR
