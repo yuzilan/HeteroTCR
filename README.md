@@ -61,6 +61,9 @@ The source code of feature extraction, model construction and training, and pred
   - `cdr3_XXX.tsv_ClusteredCDR3s_7.5.txt`: The results of running `iSMARTv3.py`.
   - `get_cluster_data.py`: Process the output of the `iSMARTv3.py` into the format we want to use for our model and put it in the `clustered_datasets` folder.
   - `Imgt_Human_TRBV.fasta`, `VgeneScores.txt`: Auxiliary iSMART files or unimportant files generated during runtime.
+* `clustered_datasets`: Each tsv file in the folder has three columns: TCR CDR3β chain amino acid sequence, peptide amino acid sequence, and Binding (currently there are only positive samples, all of which are 1).
+  - `clustered_XXX.tsv`
+  - `construct_exp_datasets.py`: Step 5. constructing datasets. To generate negative data, each CDR3 sequence in the positive dataset was paired with a peptide that has not been shown to interact with the corresponding CDR3 by shuffling or mismatching the sequences. The results of constructing positive and negative samples are placed in the `exp_datasets` folder.
 
 ### History
 
