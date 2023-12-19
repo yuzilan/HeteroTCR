@@ -32,14 +32,13 @@ conda env create -f NetTCR2.yml
 
 The source code of feature extraction, model construction and training, and prediction are deposited in the folder 'code'.
 
-* `config.py`:
-* `data_process.py`:
-* `extra_test_feature.py`:
-* `HeteroModel.py`:
-* `run_CNN.py`:
-* `run_Hetero.py`:
-* `test_Hetero.py`:
-* `tsne_Hetero.py`:
+* `config.py`: Set some command-line arguments.
+* `data_process.py`: Data processing encapsulation of graph structures.
+* `extra_test_feature.py`: Data preprocessing of the testing datasets.
+* `HeteroModel.py`: Model architecture of HeteroTCR.
+* `run_CNN.py`: Pre-trained CNN module, and data preprocessing of the training and validation datasets.
+* `run_Hetero.py`: Training and using the validation set to pick the optimal model.
+* `test_Hetero.py`: Predicting binding probabilities and geting AUC metric.
 
 ### data
 
