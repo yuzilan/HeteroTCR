@@ -115,7 +115,7 @@ blosum50_20aa = {
 print('Encoding the test data..')
 tcrb_test = enc_list_bl_max_len(test_data.cdr3, blosum50_20aa, 20)
 pep_test = enc_list_bl_max_len(test_data.peptide, blosum50_20aa, 15)
-y_test = np.array(test_data.Binding)
+# y_test = np.array(test_data.Binding)
 
 # Network architecture
 def CNN_extra():
