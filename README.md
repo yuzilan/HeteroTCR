@@ -42,12 +42,25 @@ The source code of feature extraction, model construction and training, and pred
 
 ### data
 
-* `raw_datasets` folder: we collected raw data from three well-known databases: IEDB, VDJdb, and McPAS-TCR.
+* `raw_datasets`: we collected raw data from three well-known databases: IEDB, VDJdb, and McPAS-TCR.
   - `IEDB_20220614.csv`
   - `McPAS-TCR_20220614.csv`
   - `VDJdb_20220614.tsv`
   - `filter_codes.py`: Follow the following three steps for data processing in the paper: Step 1. filtering data. Step 2. removing invalid sequences. Step 3. removing redundant sequence pairs.
-* `filter_datasets`: 
+* `filter_datasets`: The results of `filter_codes.py` processing of the raw data are placed in this folder. Each tsv file in the folder has three columns: TCR CDR3β chain amino acid sequence, peptide amino acid sequence, and Binding (currently there are only positive samples, all of which are 1).
+  - `filter_iedb.tsv`
+  - `filter_McPAS.tsv`
+  - `filter_vdjdb0.tsv`
+  - `filter_vdjdb1.tsv`
+  - `filter_vdjdb2.tsv`
+  - `filter_vdjdb3.tsv`
+* `iSMART`: Step 4. screening antigen-specific TCR CDR3s.
+  - `get_cdr3_unique.py`: The `filter_XXX.tsv` data is processed into the iSMART software input format.
+  - `cdr3_XXX.tsv`: The results of running `get_cdr3_unique.py`.
+  - `iSMARTv3.py`: iSMART software.
+  - `cdr3_XXX.tsv_ClusteredCDR3s_7.5.txt`: The results of running `iSMARTv3.py`.
+  - `get_cluster_data.py`: Process the output of the `iSMARTv3.py` into the format we want to use for our model and put it in the `clustered_datasets` folder.
+  - `Imgt_Human_TRBV.fasta`, `VgeneScores.txt`: Auxiliary iSMART files or unimportant files generated during runtime.
 
 ### History
 
