@@ -101,6 +101,75 @@ There are usually two `.pth` models in each folder (`max_AUC_{Model Name}_{epoch
 
 ## Example usages
 
+### Training: IEDB & Validation: McPAS & Testing: VDJdb
+
+Data from the specified `../data/{sd}/{td}/` reads `train.tsv` and `test.tsv` (`test.tsv` is the validation set here).
+
+Perform the following operations (pre-trained CNN module) to get `CNN_feature_cdr3/peptide_train/test.pickle` files in the `../data/{sd}/{td}/` path and specified models (`.pth`) in the `../model/{sd}_{td}_CNN/` path (If all of these files exist, you don't need to run the code described below):
+
+```commandline
+conda activate NetTCR2
+python run_CNN.py -sd exp_datasets -td iedb_McPAS
+```
+where `-sd` is the secondary directory of "data" folder, and `-td` is the tertiary directory of "data" folder. Additionally, "iedb_McPAS" in `-td iedb_McPAS` where "iedb" is the training set and "McPAS" is the validation set.
+
+Then, start training, and select the epoch with the lowest loss in the validation set to save the model to `../model/{sd}_{td}_Hetero/` folder:
+
+```commandline
+conda activate HeteroTCR
+python run_Hetero.py -sd exp_datasets -td iedb_McPAS
+```
+
+The minloss model (`minloss_AUC_{Model Name}_{epoch}_{AUC}.pth`) is the optimal model obtained by the training of HeteroTCR, and this model can be used to predict on test set.
+
+Next, the optimal model is tested on the independent testing set. 
+
+Data from the specified `../data/{sd}/{td}/` reads `test.tsv` (`test.tsv` is the independent testing set here).
+
+The pre-trained CNN module is used to extract features from the test set (Similarly, if the `.pickle` file for the testing set already exists, the following actions can be skipped):
+
+```commandline
+conda activate NetTCR2
+python extra_test_feature.py -sd exp_datasets -td iedb_vdj{score} -tmd exp_datasets_iedb_McPAS_CNN
+```
+where `{score}` is confidence scores of VDJdb ranging from 0 to 3, and `-tmd` is the model path we use.
+
+Finally, the optimal model is used to predict the testing set:
+
+```commandline
+conda activate HeteroTCR
+python test_Hetero.py -sd exp_datasets -td iedb_vdj{score} -tmd exp_datasets_iedb_McPAS_Hetero
+```
+where `-tmd` is the model path we use.
+
+In summary, the full code is as follows (You can choose which of the data splitting methods to use by adding the suffix of the dataset):
+
+```commandline
+conda activate NetTCR2
+python run_CNN.py -sd exp_datasets -td iedb_McPAS
+python run_CNN.py -sd exp_datasets -td iedb_McPAS_tb
+python run_CNN.py -sd exp_datasets -td iedb_McPAS_ab
+python run_CNN.py -sd exp_datasets -td iedb_McPAS_strict
+
+conda activate HeteroTCR
+python run_Hetero.py -sd exp_datasets -td iedb_McPAS -cu 0
+python run_Hetero.py -sd exp_datasets -td iedb_McPAS_tb -cu 0
+python run_Hetero.py -sd exp_datasets -td iedb_McPAS_ab -cu 0
+python run_Hetero.py -sd exp_datasets -td iedb_McPAS_strict -cu 0
+
+conda activate NetTCR2
+python extra_test_feature.py -sd exp_datasets -td iedb_vdj{score} -tmd exp_datasets_iedb_McPAS_CNN
+python extra_test_feature.py -sd exp_datasets -td iedb_vdj{score}_tb -tmd exp_datasets_iedb_McPAS_tb_CNN
+python extra_test_feature.py -sd exp_datasets -td iedb_vdj{score}_ab -tmd exp_datasets_iedb_McPAS_ab_CNN
+python extra_test_feature.py -sd exp_datasets -td iedb_vdj{score}_strict_new -tmd exp_datasets_iedb_McPAS_strict_CNN
+
+conda activate HeteroTCR
+python test_Hetero.py -sd exp_datasets -td iedb_vdj{score} -tmd exp_datasets_iedb_McPAS_Hetero
+python test_Hetero.py -sd exp_datasets -td iedb_vdj{score}_tb -tmd exp_datasets_iedb_McPAS_tb_Hetero
+python test_Hetero.py -sd exp_datasets -td iedb_vdj{score}_ab -tmd exp_datasets_iedb_McPAS_ab_Hetero
+python test_Hetero.py -sd exp_datasets -td iedb_vdj{score}_strict_new -tmd exp_datasets_iedb_McPAS_strict_Hetero
+```
+
 ### Training and Validation: IEDB with 5-fold cross-validation & Testing: VDJdb
 
 Data from the specified `../data/{sd}/{td}/` reads `train.tsv` and `test.tsv` (`test.tsv` is the validation set here).
@@ -128,7 +197,7 @@ Next, the optimal model is tested on the independent testing set.
 
 Data from the specified `../data/{sd}/{td}/` reads `test.tsv` (`test.tsv` is the independent testing set here).
 
-the pre-trained CNN module is used to extract features from the test set:
+The pre-trained CNN module is used to extract features from the test set:
 
 ```console
 conda activate NetTCR2
