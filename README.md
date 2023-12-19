@@ -63,7 +63,18 @@ The source code of feature extraction, model construction and training, and pred
   - `Imgt_Human_TRBV.fasta`, `VgeneScores.txt`: Auxiliary iSMART files or unimportant files generated during runtime.
 * `clustered_datasets`: Each tsv file in the folder has three columns: TCR CDR3β chain amino acid sequence, peptide amino acid sequence, and Binding (currently there are only positive samples, all of which are 1).
   - `clustered_XXX.tsv`
-  - `construct_exp_datasets.py`: Step 5. constructing datasets. To generate negative data, each CDR3 sequence in the positive dataset was paired with a peptide that has not been shown to interact with the corresponding CDR3 by shuffling or mismatching the sequences. The results of constructing positive and negative samples are placed in the `exp_datasets` folder.
+  - `construct_exp_datasets.py`: Step 5. constructing datasets. To generate negative data, each CDR3 sequence in the positive dataset was paired with a peptide that has not been shown to interact with the corresponding CDR3 by shuffling or mismatching the sequences. The results of constructing positive and negative samples are placed in the `exp_datasets`  (Pair-based data sets and Strict-based data sets) or `iedb_5folds` folder.
+* `exp_datasets`: All folders in this directory are named "A_B", where A is the training set and B is the validation or testing set (depending on the API). When a folder does not have a suffix, it is called "Pair-based data sets / seen epitopes and seen TCRs". When there is a suffix, "\_ab" corresponds to "Antigen-based data sets / unseen epitopes", "\_tb" corresponds to "TCR-based data sets / unseen TCRs", and "\_strict_new" corresponds to "Strict-based data sets / unseen epitopes and unseen TCRs".
+  * `A_B[_ab/tb/strict]`: All `XXX.pickle` files are graph-structured data generated during runtime, making it easy to reuse
+    * `CNN_feature_cdr3_train/test.pickle`
+    * `CNN_feature_peptide_train/test.pickle`
+    * `global_train/test_dataset_CNNfeature.pickle`
+    * `train.tsv`
+    * `test.tsv`
+
+  * `ab_tb.py`: Generating "Antigen-based data sets / unseen epitopes" and "TCR-based data sets / unseen TCRs".
+  * `A_B_strict_new`: `A_B_strict` does not guarantee complete strictness of the data, while `A_B_strict_new` processes "Strict-based data sets" as described in the paper.
+
 
 ### History
 
