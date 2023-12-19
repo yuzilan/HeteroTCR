@@ -78,16 +78,26 @@ The source code of feature extraction, model construction and training, and pred
   - `5folds.py`: Data processing for 5-fold cross-validation of `iedb.tsv`.
   - `fold0~4`
   - `df0~4.tsv`: Intermediate results of `5folds.py`.
+* `original_10x`: Experiments in section 2.6 of the paper.
+  - `raw`: raw data.
+  - `filter_cell.py`: Generating intermediate results `processed`, `affinity.csv`, and `test.tsv`.
+  - `get_x_y.py`: Draw pictures.
 
 ### History
 
+This folder contains all records of the metrics for training the model.
 
+Each `.tsv` file is named in the following format: `{Model Name}_{Secondary directory name of 'data' folder}_{Tertiary directory name of 'data' folder}.tsv`. 
 
+Each `.tsv` file contains the following metrics: loss, ACC, and AUC of the training set, and loss, ACC, and AUC of the validation set. Each model is trained for 1000 epoches, except for early stopping.
 
 ### model
 
+This directory contains all the best models that have been trained.
 
+Each folder in this directory is named in the following format: `{Secondary directory name of 'data' folder}_{Tertiary directory name of 'data' folder}_{Model Name}`.
 
+There are usually two `.pth` models in each folder (`max_AUC_{Model Name}_{epoch}_{AUC}.pth` and `minloss_AUC_{Model Name}_{epoch}_{AUC}.pth`), and sometimes minloss is max, so there is only one model.
 
 ## Citation
 
