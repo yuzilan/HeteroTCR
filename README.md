@@ -28,6 +28,10 @@ conda env create -f NetTCR2.yml
 
 ## Contents
 
+If you want to use our model for prediction or training, please skip to the final tutorial sections:
+* How to use trained models to predict the binding probability of peptide-TCR in the dataset we provide ourselves
+* How to use your own dataset to train HeteroTCR
+
 ### code
 
 The source code of feature extraction, model construction and training, and prediction are deposited in the folder 'code'.
@@ -256,7 +260,7 @@ python predict.py -sd my_datasets -td try -tmd exp_datasets_iedb_McPAS_Hetero
 
 After running the above code, the `try` folder will generate 3 pickle files and a `pred.tsv` file. The probabilities in the pred.tsv file are what we need.
 
-## How to use our own dataset to train HeteroTCR
+## How to use your own dataset to train HeteroTCR
 
 First, create a `my_datasets` folder under the `data` folder to store the various datasets we want to train and validate. 
 
