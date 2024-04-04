@@ -43,6 +43,7 @@ The source code of feature extraction, model construction and training, and pred
 * `run_CNN.py`: Pre-trained CNN module, and data preprocessing of the training and validation datasets.
 * `run_Hetero.py`: Training and using the validation set to pick the optimal model.
 * `test_Hetero.py`: Predicting binding probabilities and geting AUC metric.
+* `predict.py`: Predicting binding probabilities.
 
 ### data
 
@@ -82,10 +83,14 @@ The source code of feature extraction, model construction and training, and pred
   - `5folds.py`: Data processing for 5-fold cross-validation of `iedb.tsv`.
   - `fold0~4`
   - `df0~4.tsv`: Intermediate results of `5folds.py`.
-* `original_10x`: Experiments in section 2.6 of the paper.
+* `original_10x_bf0`: Experiments in section 2.6 of the paper (Figs. 8 a-d).
   - `raw`: raw data.
-  - `filter_cell.py`: Generating intermediate results `processed`, `affinity.csv`, and `test.tsv`.
-  - `get_x_y.py`: Draw pictures.
+  - `data_process.py`: Data curation of the 10x Genomics platform and calculation of binding fractions. Generating intermediate results `processed` and `donor1-4/test.tsv`.
+  - `scatter.R`: Draw pictures.
+* `original_10x`: Experiments in section 2.6 of the paper (Figs. 8 e-h).
+  - `raw`: raw data.
+  - `data_process.py`: Data curation of the 10x Genomics platform and calculation of binding fractions. Generating intermediate results `processed` and `donor1-4/test.tsv`.
+  - `scatter.R`: Draw pictures.
 
 ### History
 
