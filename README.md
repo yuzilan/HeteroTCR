@@ -1,5 +1,7 @@
 # HeteroTCR: A heterogeneous graph neural network-based method for predicting peptide-TCR interaction
 
+[![DOI](https://zenodo.org/badge/733499053.svg)](https://zenodo.org/doi/10.5281/zenodo.11118487)
+
 PyTorch implementation for [HeteroTCR](https://github.com/yuzilan/HeteroTCR) [[paper]](https://github.com/yuzilan/HeteroTCR)
 
 ## Overview
