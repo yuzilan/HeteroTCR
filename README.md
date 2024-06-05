@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/733499053.svg)](https://zenodo.org/doi/10.5281/zenodo.11118487)
 
-PyTorch implementation for [HeteroTCR](https://github.com/yuzilan/HeteroTCR) [[paper]](https://github.com/yuzilan/HeteroTCR)
+PyTorch implementation for [HeteroTCR](https://github.com/yuzilan/HeteroTCR) [[paper]](https://www.nature.com/articles/s42003-024-06380-6)
 
 ## Overview
 
@@ -297,8 +297,8 @@ After running the above code, you can find the optimal trained `.pth` models in 
 
 ## Citation
 
-If you use this code for you research, please cite our paper.
+If you use this code for your research, please cite our paper.
 
 ```
-
+Yu Z, Jiang M, Lan X. HeteroTCR: A heterogeneous graph neural network-based method for predicting peptide-TCR interaction. Commun Biol. 2024 Jun 4;7(1):684. doi: 10.1038/s42003-024-06380-6. PMID: 38834836.
 ```
